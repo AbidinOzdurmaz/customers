@@ -29,8 +29,12 @@ export class CustomerlistComponent implements OnInit {
   deleteCustomer(id: number) {
     if (confirm('Müşteri Silinsin mi')) {
       this.customerService.deleteCustomer(id).subscribe(res => {
+        console.log(res);
+        this.showCustomer();
+        this.alertifyfService.error("Müşteri silindi!");
+      },(err)=>{
+        console.log(err);
       });
-      location.reload();
     }
 
   }

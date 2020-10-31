@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { CustomerlistComponent } from '../customerlist/customerlist.component';
 
 
 @Component({
@@ -13,16 +14,18 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 export class CustomerformComponent implements OnInit {
 
   constructor(private customerService:CustomerService,
-    private alertifyfService:AlertifyService) { }
+              private alertifyfService:AlertifyService) { }
 
   title="Müşteri Ekle";
   ngOnInit(): void {
   }
 
   addComponent(data){
-    this.customerService.addCustomer(data).subscribe(res=>{
+    this.customerService.addCustomer(data).subscribe((res)=>{
+      this.alertifyfService.success("Müşteri başarıyla eklendi");
+    },(err)=>{
+      console.log(err);
     });
-    this.alertifyfService.success("Müşteri başarıyla eklendi");
   }
   
 }

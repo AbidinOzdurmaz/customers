@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CustomerlistComponent } from '../components/customerlist/customerlist.component';
 import { Customer } from '../model/customer';
 
 
@@ -21,7 +22,6 @@ export class CustomerService {
 
   addCustomer(data){
     return this.httpClient.post(this.path,data);
-    location.reload();
   }
 
 }
