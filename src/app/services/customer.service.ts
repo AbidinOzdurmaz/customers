@@ -10,9 +10,18 @@ export class CustomerService {
   constructor(private httpClient:HttpClient) { }
 
   path="http://localhost:8080/customers";
-
+  
   getProducts():Observable<Customer[]>{
      return this.httpClient.get<Customer[]>(this.path);
+  }
+
+  deleteCustomer(id:number){
+    return this.httpClient.delete('http://localhost:8080/customers/'+id);
+  }
+
+  addCustomer(data){
+    return this.httpClient.post(this.path,data);
+    location.reload();
   }
 
 }

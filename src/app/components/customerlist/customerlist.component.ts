@@ -1,32 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/model/customer';
+import { AlertifyService } from 'src/app/services/alertify.service';
 import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-customerlist',
   templateUrl: './customerlist.component.html',
   styleUrls: ['./customerlist.component.css'],
-  providers:[CustomerService]
+  providers: [CustomerService]
 })
 export class CustomerlistComponent implements OnInit {
 
-  constructor(private customerService:CustomerService) {}
-  title="Müşteri Listesi";
+  constructor(private customerService: CustomerService,
+    private alertifyfService: AlertifyService) { }
+  title = "Müşteri Listesi";
+  customerlist: Customer[];
 
   ngOnInit(): void {
-    this.customerService.getProducts().subscribe(data=>{
+    this.showCustomer();
+  }
+
+  showCustomer() {
+    this.customerService.getProducts().subscribe(data => {
       this.customerlist = data;
     });
   }
 
-  /*
-  customerlist:Customer[]=[
-    {id:1,firstName:"Abidin",lastName:"Özdurmaz",email:"abidinozd@gmail.com"},
-    {id:2,firstName:"Musa",lastName:"Özdurmaz",email:"musaozdurmaz@gmail.com"},
-    {id:3,firstName:"Nur",lastName:"Özdurmaz",email:"nürozdurmaz@gmail.com"}
+  deleteCustomer(id: number) {
+    if (confirm('Müşteri Silinsin mi')) {
+      this.customerService.deleteCustomer(id).subscribe(res => {
+      });
+      location.reload();
+    }
 
-  ];
-  */
-    customerlist:Customer[];
-
+  }
 }

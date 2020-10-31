@@ -1,9 +1,9 @@
 export class Customer{
     id:number;
 
-    firstName:string
+    firstName:string;
 
-    lastName:string
+    lastName:string;
 
-    email:string
+    email:string;
 }
