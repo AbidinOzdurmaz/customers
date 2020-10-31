@@ -22,6 +22,7 @@ export class CustomerformComponent implements OnInit {
 
   addComponent(data){
     this.customerService.addCustomer(data).subscribe((res)=>{
+      location.reload();
       this.alertifyfService.success("Müşteri başarıyla eklendi");
     },(err)=>{
       console.log(err);
